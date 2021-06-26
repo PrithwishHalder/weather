@@ -14,6 +14,20 @@ export const Background = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1rem 1rem 2rem;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 5px;
+    background-color: rgb(116, 154, 213);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(222, 227, 250);
+    border-radius: 48px;
+  }
 `;
 
 export const Input = styled.input`
@@ -50,7 +64,7 @@ export const CardContainer = styled.div`
 export const Card = styled.div`
   padding: 1rem;
 
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -73,8 +87,10 @@ export const Card = styled.div`
   }
   @media ${device.tablet} {
     margin-bottom: 1rem;
-    width: fit-content;
     min-width: 30vw;
+  }
+  @media ${device.desktop} {
+    width: fit-content;
   }
 `;
 
@@ -91,8 +107,26 @@ export const Condition = styled(Location)``;
 export const Conditions = styled.div`
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: 3rem;
+  width: ${(props) => props.width};
+  min-height: fit-content;
+  overflow-y: ${(props) => props.overflow};
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 5px;
+    background-color: rgb(116, 154, 213);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(222, 227, 250);
+    border-radius: 48px;
+  }
 `;
+Conditions.defaultProps = {
+  width: "none",
+  overflow: "initial",
+};
 
 export const Info = styled.div`
   width: 33%;
@@ -100,10 +134,24 @@ export const Info = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media ${device.mobile} {
+    width: 50%;
+  }
+  @media ${device.desktop} {
+    width: 33%;
+  }
 `;
 
 export const Img = styled.img`
   width: 30px;
   height: 30px;
   margin-right: 0.3em;
+`;
+
+export const Forcast = styled(Card)`
+  height: fit-content;
+  min-width: fit-content;
+  flex-direction: column;
+  margin: 0 auto 0 15px;
 `;

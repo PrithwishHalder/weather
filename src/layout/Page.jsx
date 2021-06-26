@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Background } from "../components/styled";
 
 import Search from "../components/Search/Search";
-import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
+import Weather from "./Pagelayout";
 
-import { weatherDetails, aqiDetails } from "../redux/actions/actions";
+import { weatherDetails } from "../redux/actions/actions";
 
 const Page = () => {
   const dispatch = useDispatch();
 
   const [city, setCity] = useState(null);
 
-  const weather = useSelector((state) => state.weather.weather);
+  const weather = useSelector((state) => state.weather);
+
+  // console.log(weather);
 
   const onChange = (e) => {
     setCity(e.target.value);
@@ -34,17 +36,10 @@ const Page = () => {
 
   return (
     <>
-      {weather.length === 1 ? (
-        <Background>
-          <Search onSubmit={onSubmit} onChange={onChange} />
-
-          <WeatherDetail weather={weather[0]} />
-        </Background>
-      ) : (
-        <Background>
-          <Search onSubmit={onSubmit} onChange={onChange} />
-        </Background>
-      )}
+      <Background>
+        <Search onSubmit={onSubmit} onChange={onChange} />
+        {weather.id !== null && <Weather weather={weather} />}
+      </Background>
     </>
   );
 };

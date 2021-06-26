@@ -5,11 +5,14 @@ import Wind from "../../assets/wind.svg";
 import Pressure from "../../assets/pressure.svg";
 import Humidity from "../../assets/humidity.svg";
 import Visibility from "../../assets/visibility.svg";
+import Mask from "../../assets/mask.svg";
 
 import { CardContainer, Card, Location, Conditions, Condition, Info, Img } from "../styled";
 
 const WeatherDetail = ({ weather }) => {
   const date = new Date(weather.dt * 1000).toLocaleString();
+
+  const aqi = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
 
   return (
     <CardContainer>
@@ -44,6 +47,10 @@ const WeatherDetail = ({ weather }) => {
         <Info>
           <Img src={Pressure} />
           {weather.main.pressure} mb
+        </Info>
+        <Info>
+          <Img src={Mask} />
+          {aqi[weather.list[0].main.aqi] || "~"}
         </Info>
       </Card>
     </CardContainer>
